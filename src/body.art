@@ -1,0 +1,18 @@
+<h1>{{title}}</h1>
+<p>开始提醒时间</p>
+<select>
+{{each startTime as value}}
+<option class="start">{{value}}</option>时
+{{/each}}
+</select>
+<p>结束提醒时间</p>
+<select>
+{{each endTime as value}}
+<option class="end">{{value}}</option>时
+{{/each}}
+</select>
+<ul>
+{{each list as value}}
+<li><input type="checkbox" value="{{value.uname}}">{{value.uname}}</input></li>
+{{/each}}
+</ul>

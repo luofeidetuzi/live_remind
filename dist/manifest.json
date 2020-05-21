@@ -1,0 +1,16 @@
+{
+    "manifest_version":2,
+    "name":"b站直播提醒",
+    "description":"这个插件是用来b站up直播提醒的",
+    "version":"1.0",
+    "icons":{ "96": "icon.png"},
+    "permissions":[
+        "https://*.bilibili.com/",
+        "notifications"
+    ],
+    "background": { "scripts": ["background.bundle.js"] },
+    "page_action":{
+        "default_icon":"icon.png"
+    },
+    "options_page": "options.html"
+}

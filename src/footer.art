@@ -1,0 +1,10 @@
+<button id="selectAll">全选</button>
+<button id="clear">清空</button>
+{{each numPage as value}}
+<button class="page">{{value}}</button>
+{{/each}}
+<h3>快速输入你想要提醒直播的up的名字，请不要输错</h3>
+<div>
+<input type="text" id="type">
+<button id="save">保存</button>
+</div>
