@@ -49,9 +49,10 @@ function showInfo(){
     var array = [];  
     for(let i=0;i<localStorage.length;i++){
         let getKey = localStorage.key(i)
-        let getVal = localStorage.getItem(getKey)
-        array.push(getVal) 
-    }  
+        if(getKey!='start'&& getKey!='end'){
+            array.push(localStorage.getItem(getKey)) 
+        }
+    }
     return array
 } 
 // 在指定的时间可以进行通知
@@ -76,13 +77,21 @@ async function make(){
         }
         if(array.length != 0){
             for(let i of array){
-                for(let j of liveList){
-                    if(i.split(',')[0] == j && i.split(',')[1]=='false'){
-                        localStorage.setItem(i.split(',')[0], [i.split(',')[0],true])
-                        notifications(i.split(',')[0])
-                    }
+                if(liveList.includes(i.split(',')[0])&&i.split(',')[1]=='false'){
+                    localStorage.setItem(i.split(',')[0], [i.split(',')[0],true])
+                    notifications(i.split(',')[0])
+                }else if(!liveList.includes(i.split(',')[0])&&i.split(',')[1]=='true'){// 第一次更新没有重置状态
+                    localStorage.setItem(i.split(',')[0], [i.split(',')[0],false])
                 }
             }
+        }else{
+            // 为了防止还有状态没有重置
+            for(let i=0;i<localStorage.length;i++){
+                let value = localStorage.getItem(localStorage.key(i))
+                if(value.split(',')[1]=='true'){
+                    localStorage.setItem(value.split(',')[0], [value.split(',')[0],false])
+                }
+            }  
         }
     }
 }
