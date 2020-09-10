@@ -76,11 +76,13 @@ async function make(){
         }
         if(array.length != 0){
             for(let i of array){
-                for(let j of liveList){
-                    if(i.split(',')[0] == j && i.split(',')[1]=='false'){
-                        localStorage.setItem(i.split(',')[0], [i.split(',')[0],true])
-                        notifications(i.split(',')[0])
-                    }
+                let flag = liveList.includes(i.split(',')[0])
+                if(flag&&i.split(',')[1]=='false'){
+                    localStorage.setItem(i.split(',')[0], [i.split(',')[0],true])
+                    notifications(i.split(',')[0])
+                }
+                if(!flag&&i.split(',')[1]=='true'){
+                    localStorage.setItem(i.split(',')[0], [i.split(',')[0],false])
                 }
             }
         }
