@@ -49,9 +49,10 @@ function showInfo(){
     var array = [];  
     for(let i=0;i<localStorage.length;i++){
         let getKey = localStorage.key(i)
-        let getVal = localStorage.getItem(getKey)
-        array.push(getVal) 
-    }  
+        if(getKey!='start'&& getKey!='end'){
+            array.push(localStorage.getItem(getKey)) 
+        }
+    }
     return array
 } 
 // 在指定的时间可以进行通知
@@ -85,6 +86,14 @@ async function make(){
                     localStorage.setItem(i.split(',')[0], [i.split(',')[0],false])
                 }
             }
+        }else{
+            // 为了防止还有状态没有重置
+            for(let i=0;i<localStorage.length;i++){
+                let value = localStorage.getItem(localStorage.key(i))
+                if(value.split(',')[1]=='true'){
+                    localStorage.setItem(value.split(',')[0], [value.split(',')[0],false])
+                }
+            }  
         }
     }
 }
